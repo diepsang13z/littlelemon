@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'restaurant',
 ]
 
@@ -84,6 +85,7 @@ DATABASES = {
         'PASSWORD': '123',
         'POST': '3306',
         'OPTION': {
+            # handles invalid or missing values from being stored in the database
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
@@ -130,3 +132,11 @@ STATIC_URL = 'restaurant/static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
